@@ -2,6 +2,24 @@
 
 Topic: CSS is pretty cool nowadays
 
+## Basics
+
+### OKLCH
+
+Human readable and easier color settings
+
+### Variables and `@property`
+
+Type safe css with `@property`, for turbo charging your css variables.
+
+```css
+@property --such-color {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #decade;
+}
+```
+
 ## Parts
 
 ### Container queries
@@ -124,6 +142,37 @@ document.startViewTransition(() => {
 example: list to grid animation
 
 
+### Color scheme with `color-scheme`
+
+Toggle light / dark page, inputs and custom components
+
+```css
+:root {
+    color-scheme: light dark;
+}
+```
+
+### Scroll driven animation
+
+Animate on scroll or on viewport intersection
+
+```css
+.animate-on-viewport-intersection {
+    animation: something-cool linear both;
+    animation-timeline: view();
+}
+
+.animate-on-scroll {
+    animation: cool-animation linear both;
+    animation-timeline: scroll();
+}
+```
+
+### Relative colors
+
+Colorscheme that changes dynamically!
+
+
 ## UI/UX improvements
 
 `accent-color`
@@ -143,3 +192,17 @@ input[type="checkbox"] {
   content-visibility: auto;
 }
 ```
+
+### Improved form validation
+
+`:user-invalid` vs `:invalid`
+
+- lazy vs eager validation
+
+### Native accordion
+
+done with `summary` and `details`
+
+### `@starting-style`
+
+easier entry events
