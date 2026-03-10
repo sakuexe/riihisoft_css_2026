@@ -1,0 +1,94 @@
+:root {
+    color-scheme: dark light;
+    font-family: monospace;
+
+    /* base color used for the colorscheme */
+    --color-brand: oklch(68% 0.1 260);
+
+    --color-bg: light-dark(
+        oklch(from var(--color-brand) 98% calc(c * 0.08) h),
+        oklch(from var(--color-brand) 16% calc(c * 0.35) h)
+    );
+
+    --color-fg: light-dark(
+        oklch(from var(--color-brand) 98% calc(c * 0.15) h),
+        oklch(from var(--color-brand) 16% calc(c * 0.45) h)
+    );
+
+    --color-text: light-dark(
+        oklch(from var(--color-brand) 22% calc(c * 0.25) h),
+        oklch(from var(--color-brand) 96% calc(c * 0.06) h)
+    );
+
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+body {
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+
+    background-color: var(--color-bg);
+    color: var(--color-text);
+
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav > a {
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+nav ul a {
+    color: currentColor;
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+main.example {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    width: clamp(400px, 100%, 800px);
+    min-height: 200px;
+        
+    @media (width > 768px) {
+        grid-template-columns: 1fr 200px;
+    }
+}
+
+aside {
+    overflow-x: auto;
+}
+
+aside style {
+    display: block;
+    white-space: pre-line;
+    height: 100%;
+    background-color: var(--color-fg);
+}
+
+footer {
+    padding: 1rem 2rem;
+    text-align: center;
+}
