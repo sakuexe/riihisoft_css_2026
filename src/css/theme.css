@@ -1,0 +1,64 @@
+:root {
+    --spacing-xxs: calc(1rem * 0.25);
+    --spacing-xs: calc(1rem * 0.5);
+    --spacing-sm: calc(1rem * 0.75);
+    --spacing-md: calc(1rem * 1);
+    --spacing-lg: calc(1rem * 1.5);
+    --spacing-xl: calc(1rem * 2);
+    --spacing-2xl: calc(1rem * 3);
+    --spacing-3xl: calc(1rem * 4);
+    --spacing-4xl: calc(1rem * 6);
+    --spacing-5xl: calc(1rem * 8);
+    --spacing-6xl: calc(1rem * 12);
+    --spacing-7xl: calc(1rem * 16);
+
+    --border-radius: 12px;
+
+    /* base color used for the colorscheme */
+    --color-brand: oklch(68% 0.1 260);
+
+    --color-bg: light-dark(
+        oklch(from var(--color-brand) 98% calc(c * 0.08) h),
+        oklch(from var(--color-brand) 16% calc(c * 0.35) h)
+    );
+
+    --color-fg: light-dark(
+        oklch(from var(--color-brand) 98% calc(c * 0.15) h),
+        oklch(from var(--color-brand) 45% calc(c * 0.45) h)
+    );
+
+    --color-text: light-dark(
+        oklch(from var(--color-brand) 22% calc(c * 0.25) h),
+        oklch(from var(--color-brand) 96% calc(c * 0.06) h)
+    );
+
+    line-height: 1.75;
+    font-size: 1.125rem;
+    font-family: monospace;
+
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    color-scheme: dark light;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    line-height: 1;
+}
+
+h3, h4 {
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
