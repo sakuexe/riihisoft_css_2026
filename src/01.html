@@ -8,8 +8,9 @@
   <link href="css/style.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <!-- syntax highlighting -->
-  <script src="/lib/prismjs/prism.js"></script>
-  <script src="/lib/prismjs/prism-css.min.js"></script>
+  <script src="/lib/prismjs/prism.js" defer></script>
+  <script src="/lib/prismjs/prism-css.min.js" defer></script>
+  <script src="/js/code-slides.js" defer></script>
 </head>
 
 <body>
@@ -22,129 +23,20 @@
 
   <main class="explanation-page">
 
-    <header>
-        <button type="button">
-          <i data-lucide="chevron-left"></i>
-        </button>
-
-        <hgroup>
-          <p>something cool</p>
-          <h1>:has()</h1>
-        </hgroup>
-
-        <button type="button">
-          <i data-lucide="chevron-right"></i>
-        </button>
-    </header>
-
-    <section class="code-blocks">
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-        <article class="slide">
-          <div class="slide-inner">
-            <pre>
-              <code class="language-css">
-form:has(input:invalid) {  
-   border: 2px solid red;
-}
-
-.card:has(img) {
-   grid-template-columns: 200px 1fr;
-}
-              </code>
-            </pre>
-          </div>
-        </article>
-
-    </section>
+      <code-slides
+        kicker="something cool"
+        title=":has()"
+        examples='[
+          "form:has(input:invalid) {\n  border: 2px solid red;\n}",
+          ".card:has(img) {\n  grid-template-columns: 200px 1fr;\n}"
+        ]'
+      ></code-slides>
 
   </main>
 
   <footer>
     <span>Riihisoft &copy; 2026</span>
   </footer>
-
-  <script>
-    lucide.createIcons();
-  </script>
 
 </body>
 

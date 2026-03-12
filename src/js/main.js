@@ -1,6 +1,3 @@
-//@ts-ignore
-lucide.createIcons();
-
 /** @type {HTMLTextAreaElement | null} */
 const cssEditor = document.querySelector("#css-editor");
 /** @type {HTMLStyleElement | null} */

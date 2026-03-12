@@ -18,19 +18,11 @@ body {
     padding-inline: min(4%, 2rem);
 }
 
-main.example {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-    width: clamp(400px, 100%, 800px);
-    min-height: 200px;
-
-    @media (width > 768px) {
-        grid-template-columns: 1fr 200px;
-    }
+main:has(code-slides) {
+    place-content: center;
 }
 
-.explanation-page {
+code-slides {
     place-self: center;
 
     &>:not(:last-child) {
@@ -67,6 +59,7 @@ main.example {
         gap: var(--spacing-md);
         overflow-x: auto;
         width: calc(100vw - max(8vw, 2rem));
+        margin-inline: auto;
         padding-inline: 10vw;
         padding-bottom: var(--spacing-xl);
         box-sizing: border-box;
