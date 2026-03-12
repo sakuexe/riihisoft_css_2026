@@ -97,16 +97,16 @@ class CodeSlides extends HTMLElement {
 
     this.innerHTML = `
       <header>
-        <button type="button" data-prev aria-label="Previous example">
+        <button type="button" class="button secondary" data-prev aria-label="Previous example">
           <i data-lucide="chevron-left"></i>
         </button>
 
         <hgroup>
-          <p>${this.escapeHtml(kicker)}</p>
-          <h1>${this.escapeHtml(title)}</h1>
+          <p>${kicker}</p>
+          <h1>${title}</h1>
         </hgroup>
 
-        <button type="button" data-next aria-label="Next example">
+        <button type="button" class="button secondary" data-next aria-label="Next example">
           <i data-lucide="chevron-right"></i>
         </button>
       </header>
@@ -115,7 +115,7 @@ class CodeSlides extends HTMLElement {
         ${examples.map((example, _) => `
           <article class="slide">
             <div class="slide-inner">
-              <pre><code class="language-css">${this.escapeHtml(example)}</code></pre>
+              <pre><code class="language-css">${example}</code></pre>
             </div>
           </article>
         `).join("")}
@@ -150,17 +150,6 @@ class CodeSlides extends HTMLElement {
       //@ts-ignore
       window.lucide.createIcons();
     }
-  }
-
-  /**
-   * @param {string} value
-   * @returns {string}
-   */
-  escapeHtml(value) {
-    return String(value)
-      .replace("&", "&amp;")
-      .replace("<", "&lt;")
-      .replace(">", "&gt;");
   }
 }
 
