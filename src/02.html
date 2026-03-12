@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | :has()</title>
+  <link href="css/style.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <!-- syntax highlighting -->
+  <script src="/lib/prismjs/prism.js"></script>
+  <script src="/lib/prismjs/prism-css.min.js"></script>
+  <script src="/js/main.js" type="module"></script>
+</head>
+
+<body>
+  <nav>
+    <a href="/">Riihisoft</a>
+    <ul>
+      <li><a href="/">navigation-item</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <main class="example-page">
+        <label for="">Hello world</label>
+        <input type="text" value="something">
+
+        <button type="button" class="toggle">
+          <i data-lucide="chevron-left"></i>
+        </button>
+    </main>
+
+    <aside aria-expanded="true">
+      <textarea id="css-editor" class="language-css" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">
+:root {
+  /*--color-brand: red;*/
+}
+      </textarea>
+      <style></style>
+    </aside>
+  </div>
+
+  <footer>
+    <span>Riihisoft &copy; 2026</span>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+</body>
+
+</html>

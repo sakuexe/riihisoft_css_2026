@@ -1,22 +1,21 @@
 @layer base, theme, components, override;
 
+@import url("../lib/prismjs/prism-tomorrow.css") layer(base);
 @import url("./theme.css") layer(theme);
 @import url("./navigation.css") layer(components);
 @import url("./footer.css") layer(components);
+@import url("./examplepage.css") layer(components);
 
 body {
     height: 100dvh;
     display: grid;
     grid-template-rows: max-content 1fr max-content;
-    scrollbar-color: var(--color-fg) transparent;
+    container-type: inline-size;
+    container-name: body;
 }
 
-body>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.container {
+    padding-inline: min(4%, 2rem);
 }
 
 main.example {
@@ -31,21 +30,13 @@ main.example {
     }
 }
 
-aside {
-    overflow-x: auto;
-}
-
-aside style {
-    display: block;
-    white-space: pre-line;
-    height: 100%;
-    background-color: var(--color-fg);
-}
-
 .explanation-page {
+    place-self: center;
+
     &>:not(:last-child) {
         margin-bottom: var(--spacing-lg);
     }
+
     header {
         display: flex;
         gap: var(--spacing-xl);
@@ -57,7 +48,7 @@ aside style {
             aspect-ratio: 1/1;
             height: fit-content;
             padding: 0.5rem 0.75rem;
-            border: 1px solid var(--color-fg);
+            border: 1px solid var(--color-border);
             border-radius: var(--border-radius);
             background-color: transparent;
         }
@@ -103,7 +94,7 @@ aside style {
     .slide pre {
         margin: 0;
         padding-inline: var(--spacing-xl);
-        border: 1px solid var(--color-fg);
+        border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         white-space: pre-line;
         height: clamp(400px, 100%, 1000px);

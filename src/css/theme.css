@@ -24,6 +24,11 @@
 
     --color-fg: light-dark(
         oklch(from var(--color-brand) 98% calc(c * 0.15) h),
+        oklch(from var(--color-brand) 25% calc(c * 0.45) h)
+    );
+
+    --color-border: light-dark(
+        oklch(from var(--color-brand) 98% calc(c * 0.15) h),
         oklch(from var(--color-brand) 45% calc(c * 0.45) h)
     );
 
@@ -36,8 +41,8 @@
     font-size: 1.125rem;
     font-family: monospace;
 
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--color-bg, #121);
+    color: var(--color-text, #decade);
     color-scheme: dark light;
 }
 
@@ -48,6 +53,7 @@
 body {
     margin: 0;
     padding: 0;
+    scrollbar-color: var(--color-border) transparent;
 }
 
 h1, h2 {
@@ -62,3 +68,7 @@ h1 {
     font-size: 4rem;
 }
 
+/* prism.js overrides */
+:not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background-color: var(--color-fg);
+}
