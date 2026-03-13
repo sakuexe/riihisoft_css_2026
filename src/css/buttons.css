@@ -1,5 +1,6 @@
 .button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: calc(var(--border-radius) / 2);
     cursor: pointer;

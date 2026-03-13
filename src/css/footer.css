@@ -1,4 +1,6 @@
 footer {
-    padding: 1rem 2rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: var(--spacing-lg);
 }

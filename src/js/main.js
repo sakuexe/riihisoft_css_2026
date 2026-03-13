@@ -1,3 +1,11 @@
+// libraries
+import "../lib/prismjs/prism.js";
+import "../lib/prismjs/prism-css.min.js";
+import "../lib/lucide/lucide.js";
+// web components
+import "./footer.js";
+import "./code-slides.js";
+
 /** @type {HTMLTextAreaElement | null} */
 const cssEditor = document.querySelector("#css-editor");
 /** @type {HTMLStyleElement | null} */
