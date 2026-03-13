@@ -9,6 +9,10 @@
         transition: color 200ms ease-in-out;
         transition-property: color, background-color, text-underline-offset;
     }
+
+    &[target="_blank"]::after {
+        content: "‎ 🡵";
+    }
 }
 
 .button.primary {

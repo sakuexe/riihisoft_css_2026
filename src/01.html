@@ -7,33 +7,32 @@
   <title>Riihisoft CSS | :has()</title>
   <script src="/js/main.js" type="module" blocking="render"></script>
   <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
 </head>
 
 <body>
-  <nav>
-    <a href="/">Riihisoft</a>
-    <ul>
-      <li><a href="/">navigation-item</a></li>
-    </ul>
-  </nav>
+  <rs-nav></rs-nav>
 
   <main class="explanation-page">
 
-      <code-slides
-        kicker="something cool"
-        title=":has()"
-        examples='[
+    <code-slides kicker="To have or not to have" title=":has()" examples='[
           "form:has(input:invalid) {\n  border: 2px solid red;\n}",
           ".card:has(img) {\n  grid-template-columns: 200px 1fr;\n}"
-        ]'
-      >
-      </code-slides>
+        ]'>
+    </code-slides>
 
-      <div class="reference-buttons">
-        <a href="https://google.com" target="_blank" class="button primary">Something</a>
-        <a href="https://google.com" target="_blank" class="button secondary">Example #2</a>
-        <a href="https://google.com" target="_blank" class="button link">Mozilla example</a>
-      </div>
+    <div class="reference-buttons">
+      <a href="https://www.youtube.com/watch?v=cxSowU9sDdU" target="_blank" class="button secondary">
+          Video example
+      </a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has" target="_blank"
+        class="button secondary">
+          Mozilla Docs
+      </a>
+      <a href="https://caniuse.com/css-has" target="_blank" class="button link">
+          Browser support
+      </a>
+    </div>
 
   </main>
 

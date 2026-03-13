@@ -5,7 +5,6 @@
 
 @import url("./theme.css") layer(theme);
 
-@import url("./navigation.css") layer(components);
 @import url("./buttons.css") layer(components);
 @import url("./footer.css") layer(components);
 @import url("./examplepage.css") layer(components);
@@ -20,5 +19,5 @@ body {
 }
 
 .container {
-    padding-inline: min(4%, 2rem);
+    padding-inline: min(4%, var(--spacing-xl));
 }

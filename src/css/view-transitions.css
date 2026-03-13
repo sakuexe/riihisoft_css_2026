@@ -2,7 +2,7 @@
     navigation: auto;
 }
 
-nav {
+rs-nav {
     view-transition-name: navigation;
 }
 
@@ -41,14 +41,14 @@ rs-footer {
     }
 
     to {
-        transform: translateX(-30%) rotate(-6deg) scale(0.98);
+        transform: translateX(-30%) rotate(0) scale(0.98);
         opacity: 0.25;
     }
 }
 
 @keyframes slide-new {
     from {
-        transform: translateX(100%) rotate(6deg) scale(1);
+        transform: translateX(100%) rotate(0) scale(1);
         opacity: 1;
     }
 
