@@ -18,6 +18,7 @@ class RiihisoftFooter extends HTMLElement {
   render() {
     const prev = this.getAttribute("prev") || "#";
     const next = this.getAttribute("next") || "#";
+    const pageNumber = location.pathname.split("/")[1]?.split(".html")[0] || "00";
 
     this.innerHTML = `
       <footer class="container">
@@ -25,9 +26,12 @@ class RiihisoftFooter extends HTMLElement {
           <i data-lucide="chevron-left"></i>
         </a>
 
-        <span>Riihisoft &copy; 2026</span>
+        <div>
+          <span><strong>${pageNumber}</strong> / 20</span>
+          <span>Riihisoft &copy; 2026</span>
+        </div>
 
-        <a href="${next}" class="button secondary">
+        <a href="${next}" preload="true" class="button secondary">
           <i data-lucide="chevron-right"></i>
         </a>
       </footer>

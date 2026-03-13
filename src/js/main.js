@@ -11,14 +11,14 @@ const cssEditor = document.querySelector("#css-editor");
 /** @type {HTMLStyleElement | null} */
 const styleBlock = document.querySelector("aside style");
 
-
 function updateStyle() {
   if (!cssEditor) {
-    throw new Error("could not find `#css-editor`");
+    console.debug("could not find `#css-editor`");
   }
   if (!styleBlock) {
-    throw new Error("could not find `aside style`");
+    console.debug("could not find `aside style`");
   }
+  if (!cssEditor || !styleBlock) return;
 
   styleBlock.textContent = cssEditor.value;
 }

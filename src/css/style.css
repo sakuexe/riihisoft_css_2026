@@ -1,7 +1,10 @@
 @layer base, theme, components, override;
 
 @import url("../lib/prismjs/prism-tomorrow.css") layer(base);
+@import url("./view-transitions.css") layer(base);
+
 @import url("./theme.css") layer(theme);
+
 @import url("./navigation.css") layer(components);
 @import url("./buttons.css") layer(components);
 @import url("./footer.css") layer(components);

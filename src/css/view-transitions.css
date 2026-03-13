@@ -1,0 +1,59 @@
+@view-transition {
+    navigation: auto;
+}
+
+nav {
+    view-transition-name: navigation;
+}
+
+rs-footer {
+    view-transition-name: footer;
+}
+
+::view-transition-group(root) {
+    animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+}
+
+::view-transition-image-pair(root) {
+    isolation: auto;
+}
+
+::view-transition-old(root) {
+    animation: slide-old 500ms cubic-bezier(.22, 1, .36, 1) both;
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+    }
+}
+
+::view-transition-new(root) {
+    animation: slide-new 500ms cubic-bezier(.22, 1, .36, 1) both;
+    box-shadow: -24px 0 40px rgba(0, 0, 0, 0.25);
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+    }
+}
+
+@keyframes slide-old {
+    from {
+        transform: translateX(0) rotate(0) scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-30%) rotate(-6deg) scale(0.98);
+        opacity: 0.25;
+    }
+}
+
+@keyframes slide-new {
+    from {
+        transform: translateX(100%) rotate(6deg) scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(0) rotate(0) scale(1);
+        opacity: 1;
+    }
+}
