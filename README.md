@@ -4,8 +4,8 @@ Topic: CSS is pretty cool nowadays
 
 Repositories:
 
-- [Github repo](https://github.com/sakuexe/riihisoft_css_2026)
-- [Tangled repo](https://tangled.org/saku.tngl.sh/riihisoft-css-training-2026)
+- [Github mirror](https://github.com/sakuexe/riihisoft_css_2026)
+- [Tangled mirror](https://tangled.org/saku.tngl.sh/riihisoft-css-training-2026)
 
 ## Basics
 

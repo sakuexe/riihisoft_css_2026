@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Riihisoft CSS | :has()</title>
+  <title>Riihisoft CSS | OKLCH</title>
   <script src="/js/main.js" type="module" blocking="render"></script>
   <link href="/css/style.css" rel="stylesheet">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
@@ -15,11 +15,50 @@
 
   <main class="explanation-page">
 
-    <code-slides kicker="To have or not to have" title=":has()" examples='[
-          "form:has(input:invalid) {\n  border: 2px solid red;\n}",
-          ".card:has(img) {\n  grid-template-columns: 200px 1fr;\n}"
-        ]'>
-    </code-slides>
+    <rs-code-slides kicker="Paremmat ja helpommat värit" title="OKLCH">
+      <rs-code-block language="css">
+/* 
+   oklch(L C H)
+   L = Lightness (0–1) : kirkkaus
+   C = Chroma (0-100%) : värikylläisyys
+   H = Hue (0–360) : väriympyrän kulma asteissa
+*/
+
+.root {
+  --color-bright-red: oklch(0.85 50% 30);
+  --color-dark-blue: oklch(0.25 50% 245);
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+:root {
+  --hue: 140;
+  --chroma: 0.16;
+
+  --primary: oklch(0.60 var(--chroma) var(--hue));
+  --primary-light: oklch(0.80 var(--chroma) var(--hue));
+  --primary-dark: oklch(0.40 var(--chroma) var(--hue));
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+:root {
+  --brand-hue: 260;
+  --brand-chroma: 0.18;
+
+  --brand:  oklch(0.80 var(--brand-chroma) var(--brand-hue));
+  --brand-dark: oklch(0.50 var(--brand-chroma) var(--brand-hue));
+}
+
+.button {
+  background: var(--brand);
+}
+
+.button:hover {
+  background: var(--brand-dark);
+}
+      </rs-code-block>
+    </rs-code-slides>
 
     <div class="reference-buttons">
       <a href="https://www.youtube.com/watch?v=cxSowU9sDdU" target="_blank" class="button secondary">

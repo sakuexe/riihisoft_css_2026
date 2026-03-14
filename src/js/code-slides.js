@@ -1,8 +1,8 @@
+
 /**
  * @typedef {Object} CodeSlidesData
  * @property {string} kicker
  * @property {string} title
- * @property {string[]} examples
  */
 
 /**
@@ -10,35 +10,28 @@
  */
 class CodeSlides extends HTMLElement {
   static get observedAttributes() {
-    return ["kicker", "title", "examples"];
+    return ["kicker", "title"];
   }
 
   constructor() {
     super();
+    this.attachShadow({ mode: "open" });
 
     /** @type {CodeSlidesData} */
     this._data = {
       kicker: "",
-      title: "",
-      examples: []
+      title: ""
     };
   }
 
-  /**
-   * @returns {CodeSlidesData}
-   */
   get data() {
     return this._data;
   }
 
-  /**
-   * @param {Partial<CodeSlidesData>} value
-   */
   set data(value) {
     this._data = {
       kicker: value?.kicker ?? "",
-      title: value?.title ?? "",
-      examples: Array.isArray(value?.examples) ? value.examples : []
+      title: value?.title ?? ""
     };
 
     this.render();
@@ -49,56 +42,78 @@ class CodeSlides extends HTMLElement {
     this.render();
   }
 
-  /**
-   * @param {string} _name
-   * @param {string | null} _oldValue
-   * @param {string | null} _newValue
-   * @returns {void}
-   */
-  attributeChangedCallback(_name, _oldValue, _newValue) {
+  attributeChangedCallback() {
     this.readAttributes();
     this.render();
   }
 
-  /**
-   * @returns {void}
-   */
   readAttributes() {
-    const kicker = this.getAttribute("kicker") ?? "";
-    const title = this.getAttribute("title") ?? "";
-    const examplesAttr = this.getAttribute("examples");
-
-    /** @type {string[]} */
-    let examples = [];
-
-    if (examplesAttr) {
-      try {
-        const parsed = JSON.parse(examplesAttr);
-        if (Array.isArray(parsed)) {
-          examples = parsed.map(String);
-        }
-      } catch (error) {
-        console.error("Invalid examples JSON:", error);
-      }
-    }
-
     this._data = {
-      kicker,
-      title,
-      examples
+      kicker: this.getAttribute("kicker") ?? "",
+      title: this.getAttribute("title") ?? ""
     };
   }
 
-  /**
-   * @returns {void}
-   */
   render() {
-    const { kicker, title, examples } = this._data;
+    const { kicker, title } = this._data;
 
-    this.innerHTML = `
+    if (!this.shadowRoot) return;
+
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="/css/buttons.css">
+      <link rel="stylesheet" href="/css/fonts.css">
+  
+      <style>
+        :host {
+          place-self: center;
+        }
+
+        :host > :not(:last-child) {
+          margin-bottom: var(--spacing-lg);
+        }
+
+        header {
+          display: flex;
+          gap: var(--spacing-xl);
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        header > button {
+          aspect-ratio: 1/1;
+          height: fit-content;
+          border: 1px solid var(--color-border);
+          border-radius: var(--border-radius);
+          background-color: transparent;
+        }
+
+        header hgroup > * {
+          margin: 0;
+        }
+
+        header hgroup > *:not(:last-child) {
+          margin-bottom: var(--spacing-xxs);
+        }
+
+        .code-blocks {
+          display: flex;
+          gap: var(--spacing-md);
+          overflow-x: auto;
+          width: min(calc(100vw - max(8vw, 2rem)), 1600px);
+          margin-inline: auto;
+          padding-inline: 10vw;
+          padding-bottom: var(--spacing-xl);
+          box-sizing: border-box;
+
+          scroll-snap-type: x mandatory;
+        }
+
+      </style>
+
       <header>
         <button type="button" class="button secondary" data-prev aria-label="Previous example">
-          <i data-lucide="chevron-left"></i>
+          <i class="material-symbols">chevron_left</i>
         </button>
 
         <hgroup>
@@ -107,29 +122,23 @@ class CodeSlides extends HTMLElement {
         </hgroup>
 
         <button type="button" class="button secondary" data-next aria-label="Next example">
-          <i data-lucide="chevron-right"></i>
+          <i class="material-symbols">chevron_right</i>
         </button>
       </header>
 
       <section class="code-blocks">
-        ${examples.map((example, _) => `
-          <article class="slide">
-            <div class="slide-inner">
-              <pre><code class="language-css">${example}</code></pre>
-            </div>
-          </article>
-        `).join("")}
+        <slot></slot>
       </section>
     `;
 
     /** @type {HTMLButtonElement | null} */
-    const prevBtn = this.querySelector("[data-prev]");
+    const prevBtn = this.shadowRoot.querySelector("[data-prev]");
 
     /** @type {HTMLButtonElement | null} */
-    const nextBtn = this.querySelector("[data-next]");
+    const nextBtn = this.shadowRoot.querySelector("[data-next]");
 
     /** @type {HTMLElement | null} */
-    const container = this.querySelector(".code-blocks");
+    const container = this.shadowRoot.querySelector(".code-blocks");
 
     prevBtn?.addEventListener("click", () => {
       container?.scrollBy({
@@ -144,13 +153,7 @@ class CodeSlides extends HTMLElement {
         behavior: "smooth"
       });
     });
-
-    //@ts-ignore
-    if (window.lucide?.createIcons) {
-      //@ts-ignore
-      window.lucide.createIcons();
-    }
   }
 }
 
-customElements.define("code-slides", CodeSlides);
+customElements.define("rs-code-slides", CodeSlides);

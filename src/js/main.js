@@ -1,11 +1,10 @@
 // libraries
-import "../lib/prismjs/prism.js";
-import "../lib/prismjs/prism-css.min.js";
-import "../lib/lucide/lucide.js";
+import "/lib/highlightjs/highlight.js";
 // web components
 import "./footer.js";
 import "./nav.js";
 import "./code-slides.js";
+import "./code-block.js";
 
 /** @type {HTMLTextAreaElement | null} */
 const cssEditor = document.querySelector("#css-editor");

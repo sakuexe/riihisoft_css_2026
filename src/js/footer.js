@@ -5,6 +5,7 @@ class RiihisoftFooter extends HTMLElement {
 
   constructor() {
     super();
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
@@ -20,10 +21,33 @@ class RiihisoftFooter extends HTMLElement {
     const next = this.getAttribute("next") || "#";
     const pageNumber = location.pathname.split("/")[1]?.split(".html")[0] || "00";
 
-    this.innerHTML = `
+    if (!this.shadowRoot) return;
+
+    this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="/css/buttons.css">
+      <link rel="stylesheet" href="/css/fonts.css">
+
+      <style>
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-block: var(--spacing-lg);
+        }
+
+        div>* {
+            display: block;
+            text-align: center;
+        }
+
+        strong {
+            color: var(--color-brand);
+        }
+      </style>
+
       <footer class="container">
         <a href="${prev}" class="button secondary">
-          <i data-lucide="chevron-left"></i>
+          <i class="material-symbols">chevron_left</i>
         </a>
 
         <div>
@@ -32,7 +56,7 @@ class RiihisoftFooter extends HTMLElement {
         </div>
 
         <a href="${next}" preload="true" class="button secondary">
-          <i data-lucide="chevron-right"></i>
+          <i class="material-symbols">chevron_right</i>
         </a>
       </footer>
     `;

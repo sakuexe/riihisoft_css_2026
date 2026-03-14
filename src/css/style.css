@@ -1,14 +1,12 @@
 @layer base, theme, components, override;
 
-@import url("../lib/prismjs/prism-tomorrow.css") layer(base);
 @import url("./view-transitions.css") layer(base);
 
 @import url("./theme.css") layer(theme);
+@import url("./fonts.css") layer(theme);
 
 @import url("./buttons.css") layer(components);
-@import url("./footer.css") layer(components);
 @import url("./examplepage.css") layer(components);
-@import url("./code-slides.css") layer(components);
 
 body {
     height: 100dvh;
@@ -20,4 +18,17 @@ body {
 
 .container {
     padding-inline: min(4%, var(--spacing-xl));
+}
+
+/* code slides page */
+main:has(rs-code-slides) {
+    place-content: center;
+
+    & .reference-buttons {
+        margin-top: var(--spacing-lg);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+        justify-content: center;
+    }
 }
