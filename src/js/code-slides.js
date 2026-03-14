@@ -142,14 +142,14 @@ class CodeSlides extends HTMLElement {
 
     prevBtn?.addEventListener("click", () => {
       container?.scrollBy({
-        left: -container.clientWidth * 0.8,
+        left: -container.clientWidth * 0.5,
         behavior: "smooth"
       });
     });
 
     nextBtn?.addEventListener("click", () => {
       container?.scrollBy({
-        left: container.clientWidth * 0.8,
+        left: container.clientWidth * 0.5,
         behavior: "smooth"
       });
     });

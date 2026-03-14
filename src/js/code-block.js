@@ -1,3 +1,12 @@
+import hljs from "../lib/highlight/highlight.min.js";
+import css from "../lib/highlight/languages/css.min.js";
+import javascript from "../lib/highlight/languages/javascript.min.js";
+import xml from "../lib/highlight/languages/xml.min.js";
+
+hljs.registerLanguage('css', css);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
+
 /**
  * @extends HTMLElement
  */
@@ -6,14 +15,11 @@ class RiihisoftCodeBlock extends HTMLElement {
     return ["language"];
   }
 
+  static themeSheetPromise = null;
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.loadStyles().then(s => {
-      if (!this.shadowRoot) return;
-      this.shadowRoot.adoptedStyleSheets = [s];
-    })
-    
   }
 
   connectedCallback() {
@@ -24,26 +30,26 @@ class RiihisoftCodeBlock extends HTMLElement {
     this.render();
   }
 
-  async loadStyles() {
-    const sheet = new CSSStyleSheet();
-    sheet.replaceSync(await (await fetch("/lib/highlightjs/default.css")).text());
-    return sheet
-  }
-
-  render() {
+  async render() {
     if (!this.shadowRoot) return;
 
-    const language = this.getAttribute("language") ?? "css";
-    const slot = this.querySelector(":scope > *") ?? this;
-    const code = slot.textContent?.trim() ?? "";
+    const language = this.getAttribute("language") ?? "plaintext";
+    const source = this.querySelector(":scope > *");
+    const rawCode = source?.textContent?.trim() ?? this.textContent?.trim() ?? "";
+
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const theme = isDark
+      ? "/lib/highlight/styles/rose-pine.min.css"
+      : "/lib/highlight/styles/rose-pine-dawn.min.css";
 
     this.shadowRoot.innerHTML = `
+      <link rel="stylesheet" href="${theme}">
+
       <style>
         :host {
           flex: 0 0 80%;
           scroll-snap-align: center;
           margin-inline: auto;
-          
           container-type: scroll-state;
           container-name: slide;
           font-family: monospace;
@@ -54,7 +60,6 @@ class RiihisoftCodeBlock extends HTMLElement {
           opacity: 0.5;
           transition: transform 750ms ease, opacity 750ms ease;
           transform-origin: center center;
-
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -65,9 +70,8 @@ class RiihisoftCodeBlock extends HTMLElement {
           margin: 0;
           padding-inline: var(--spacing-xl);
           padding-block: var(--spacing-md);
-          width: min(80vw, 800px);
+          width: min(80vw, 1000px);
           overflow-x: auto;
-
           border: 1px solid var(--color-border);
           border-radius: var(--border-radius);
           background-color: var(--color-bg);
@@ -81,15 +85,51 @@ class RiihisoftCodeBlock extends HTMLElement {
           }
         }
 
-        code {
-          font-size: 1.125rem;
+        code.hljs {
+          font-size: 1.25rem;
+          display: block;
+          background-color: transparent;
         }
+
+        /*
+        .hljs-comment, .hljs-meta, code.hljs {
+          color: oklch(from var(--color-text) l c h / 0.5);
+        }
+
+        .hljs-deletion, .hljs-doctag, .hljs-regexp, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-tag, .hljs-template-tag, .hljs-variable.language_ {
+          color: oklch(from var(--color-brand) l c calc(h + 60));
+        }
+
+        .hljs-attr, .hljs-char.escape_, .hljs-keyword, .hljs-name, .hljs-operator {
+          color: oklch(from var(--color-brand) l c calc(h - 60));
+        }
+
+        .hljs-attribute, .hljs-built_in {
+          color: oklch(from var(--color-brand) l c calc(h + 120));
+        }
+
+        .hljs-link, .hljs-literal, .hljs-number, .hljs-params, .hljs-template-variable, .hljs-type, .hljs-variable {
+          color: oklch(from var(--color-text) l c h);
+        }
+        */
       </style>
 
       <div class="code-block">
-        <pre><code class="language-${language}">${code}</code></pre>
+        <pre><code></code></pre>
       </div>
     `;
+
+    const codeEl = this.shadowRoot.querySelector("code");
+    if (!codeEl) return;
+
+    codeEl.className = `language-${language}`;
+    codeEl.textContent = rawCode;
+
+    try {
+      hljs.highlightElement(codeEl);
+    } catch (error) {
+      console.warn("Highlighting failed:", error);
+    }
   }
 }
 

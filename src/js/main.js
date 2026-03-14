@@ -1,5 +1,3 @@
-// libraries
-import "/lib/highlightjs/highlight.js";
 // web components
 import "./footer.js";
 import "./nav.js";

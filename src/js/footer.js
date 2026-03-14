@@ -33,6 +33,7 @@ class RiihisoftFooter extends HTMLElement {
             justify-content: space-between;
             align-items: center;
             padding-block: var(--spacing-lg);
+            padding-inline: min(4%, var(--spacing-xl));
         }
 
         div>* {
