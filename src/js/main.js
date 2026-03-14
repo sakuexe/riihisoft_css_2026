@@ -3,6 +3,7 @@ import "./footer.js";
 import "./nav.js";
 import "./code-slides.js";
 import "./code-block.js";
+import "./example-editor.js";
 
 /** @type {HTMLTextAreaElement | null} */
 const cssEditor = document.querySelector("#css-editor");
@@ -23,21 +24,6 @@ function updateStyle() {
 
 cssEditor?.addEventListener("input", updateStyle);
 updateStyle();
-
-/** @type {HTMLButtonElement | null} */
-const cssEditorToggle = document.querySelector(".example-page button.toggle");
-/** @type {HTMLDivElement | null} */
-const editorWindow = document.querySelector(".example-page + aside:has(#css-editor)");
-
-cssEditorToggle?.addEventListener("click", (_) => {
-  if (!editorWindow) {
-    throw new Error("could not find `.example-page + aside:has(#css-editor)`");
-  }
-
-  editorWindow.ariaExpanded = editorWindow.ariaExpanded === "true"
-    ? "false"
-    : "true"
-})
 
 document.addEventListener('DOMContentLoaded', () => {
   let sakuStyle = "color: oklch(0.65 0.16 300); font-size: 1rem; font-weight: 600; padding: 0.2em 0;"

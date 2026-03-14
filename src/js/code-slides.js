@@ -1,4 +1,3 @@
-
 /**
  * @typedef {Object} CodeSlidesData
  * @property {string} kicker
@@ -8,7 +7,7 @@
 /**
  * @extends HTMLElement
  */
-class CodeSlides extends HTMLElement {
+class RiihisoftCodeSlides extends HTMLElement {
   static get observedAttributes() {
     return ["kicker", "title"];
   }
@@ -156,4 +155,4 @@ class CodeSlides extends HTMLElement {
   }
 }
 
-customElements.define("rs-code-slides", CodeSlides);
+customElements.define("rs-code-slides", RiihisoftCodeSlides);

@@ -13,26 +13,12 @@
 <body>
   <rs-nav></rs-nav>
 
-  <div class="container">
-
-    <main class="example-page">
+  <main class="container">
+      <rs-css-editor css=":root { color: red };" open="false">
         <label for="">Hello world</label>
         <input type="text" value="something">
-
-        <button type="button" class="toggle">
-          <i data-lucide="chevron-left"></i>
-        </button>
-    </main>
-
-    <aside aria-expanded="true">
-      <textarea id="css-editor" class="language-css" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}">
-:root {
-  /*--color-brand: red;*/
-}
-      </textarea>
-      <style></style>
-    </aside>
-  </div>
+      </rs-css-editor>
+  </main>
 
   <rs-footer prev="/01.html" next="/03.html"></rs-footer>
 </body>
