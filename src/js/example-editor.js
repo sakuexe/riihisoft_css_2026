@@ -63,97 +63,98 @@ class RiihisoftCssEditor extends HTMLElement {
       <link rel="stylesheet" href="/css/fonts.css">
   
       <style>
-        :host {
-            --animation-duration: 750ms;
-            --animation-delay: 150ms;
+      :host {
+        --animation-duration: 750ms;
+        --animation-delay: 150ms;
 
-            display: grid;
-            width: min(1920px, 100%);
-            height: clamp(600px, 80vh, 1000px);
-            place-self: center;
-            gap: var(--spacing-md);
-            font-size: 1.25em;
+        display: grid;
+        width: min(1920px, 100%);
+        height: clamp(600px, 80vh, 1000px);
+        place-self: center;
+        gap: var(--spacing-md);
+        font-size: 1.25em;
 
-            transition: grid-template-columns var(--animation-duration) ease-in-out;
-            transition-delay: var(--animation-delay);
+        transition: grid-template-columns var(--animation-duration) ease-in-out;
+        transition-delay: var(--animation-delay);
 
-            @container (width > 768px) {
-                grid-template-columns: 1fr 0px;
-            }
+        @container (width > 768px) {
+          grid-template-columns: 1fr 0px;
         }
+      }
 
-        :host:has(aside[aria-expanded="true"]) {
-            @container (width > 768px) {
-                grid-template-columns: 1fr 400px;
-            }
+      :host:has(aside[aria-expanded="true"]) {
+        @container (width > 768px) {
+          grid-template-columns: 1fr max(500px, 20vw);
         }
+      }
 
-        section {
-            display: grid;
-            place-content: center;
-            width: 100%;
+      section {
+        display: grid;
+        place-content: center;
+        width: 100%;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        font-size: 1em;
+        position: relative;
+      }
+
+      section button.toggle {
+        position: absolute;
+        inset: 0;
+        margin-block: auto;
+        margin-inline: auto var(--spacing-md);
+        width: 32px;
+        height: 64px;
+        display: grid;
+        place-content: center;
+
+        background-color: var(--color-fg);
+        border: 1px solid var(--color-border);
+        border-radius: calc(var(--border-radius) / 2);
+      }
+
+      section button.toggle i {
+        transition: rotate 150ms ease-in-out;
+      }
+
+      section:has(+aside[aria-expanded="true"]) button.toggle i {
+        rotate: 0.5turn;
+      }
+
+      aside {
+        overflow-x: auto;
+        overflow-y: clip;
+
+        transition: opacity calc(var(--animation-duration) / 2) ease-in-out;
+        transition-delay: calc(var(--animation-delay) * 2);
+
+          &[aria-expanded="false"] {
+            overflow-x: clip;
+            opacity: 0;
+          }
+
+          #css-editor {
             border: 1px solid var(--color-border);
             border-radius: var(--border-radius);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: transparent;
+            height: 100%;
+            width: 100%;
+
+            margin: 0;
+            tab-size: 4;
             font-size: 1em;
-            position: relative;
-        }
+            transition: color var(--animation-delay) ease-in-out;
+            box-sizing: border-box;
+          }
 
-        section button.toggle {
-            position: absolute;
-            inset: 0;
-            margin-block: auto;
-            margin-inline: auto var(--spacing-md);
-            width: 32px;
-            height: 64px;
-            display: grid;
-            place-content: center;
+          &[aria-expanded="false"] #css-editor {
+            color: transparent;
+          }
 
-            background-color: var(--color-fg);
-            border: 1px solid var(--color-border);
-            border-radius: calc(var(--border-radius) / 2);
-        }
-
-        section button.toggle i {
-          transition: rotate 150ms ease-in-out;
-        }
-
-        section:has(+aside[aria-expanded="true"]) button.toggle i {
-            rotate: 0.5turn;
-        }
-
-        aside {
-            overflow-x: auto;
-            overflow-y: clip;
-
-            transition: opacity calc(var(--animation-duration) / 2) ease-in-out;
-            transition-delay: calc(var(--animation-delay) * 2);
-
-            &[aria-expanded="false"] {
-                overflow-x: clip;
-                opacity: 0;
-            }
-
-            #css-editor {
-                border: 1px solid var(--color-border);
-                border-radius: var(--border-radius);
-                padding: var(--spacing-md) var(--spacing-lg);
-                background-color: transparent;
-                height: 100%;
-                margin: 0;
-                width: 100%;
-                tab-size: 4;
-                font-size: 1em;
-                transition: color var(--animation-delay) ease-in-out;
-
-            }
-
-            &[aria-expanded="false"] #css-editor {
-                color: transparent;
-            }
-
-            &[aria-expanded="true"] #css-editor {
-                transition-delay: calc(var(--animation-duration) + var(--animation-delay));
-            }
+          &[aria-expanded="true"] #css-editor {
+            transition-delay: calc(var(--animation-duration) + var(--animation-delay));
+          }
         }
       </style>
 
@@ -170,7 +171,6 @@ class RiihisoftCssEditor extends HTMLElement {
           class="language-css" 
           onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
         >${css}</textarea>
-        <style></style>
       </aside>
     `;
 
@@ -187,6 +187,20 @@ class RiihisoftCssEditor extends HTMLElement {
       this._data.open = !this._data.open;
       editorWindow.ariaExpanded = String(this._data.open);
     })
+
+    /** @type {HTMLTextAreaElement | null} */
+    const cssEditor = this.shadowRoot.querySelector("#css-editor");
+    if (!cssEditor) throw new Error("`#css-editor` not found inside the rs-css-editor component");
+
+    /** @type {HTMLStyleElement } */
+    this.previewStyle = document.createElement('style');
+    this.appendChild(this.previewStyle);
+    this.previewStyle.textContent = css;
+
+    cssEditor.addEventListener('input', (e) => {
+      //@ts-ignore
+      this.previewStyle.textContent = e.target.value;
+    });
   }
 }
 

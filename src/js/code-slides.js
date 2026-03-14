@@ -95,7 +95,7 @@ class RiihisoftCodeSlides extends HTMLElement {
           margin-bottom: var(--spacing-xxs);
         }
 
-        .code-blocks {
+        section {
           display: flex;
           gap: var(--spacing-md);
           overflow-x: auto;
@@ -107,7 +107,6 @@ class RiihisoftCodeSlides extends HTMLElement {
 
           scroll-snap-type: x mandatory;
         }
-
       </style>
 
       <header>
@@ -125,7 +124,7 @@ class RiihisoftCodeSlides extends HTMLElement {
         </button>
       </header>
 
-      <section class="code-blocks">
+      <section>
         <slot></slot>
       </section>
     `;
@@ -137,7 +136,7 @@ class RiihisoftCodeSlides extends HTMLElement {
     const nextBtn = this.shadowRoot.querySelector("[data-next]");
 
     /** @type {HTMLElement | null} */
-    const container = this.shadowRoot.querySelector(".code-blocks");
+    const container = this.shadowRoot.querySelector("section");
 
     prevBtn?.addEventListener("click", () => {
       container?.scrollBy({
