@@ -34,7 +34,7 @@
     backdrop-filter: blur(15px);
 
     &:hover {
-        background-color: var(--color-brand);
+        background-color: oklch(from var(--color-brand) l c h / 0.25);
         color: currentColor;
     }
 }
