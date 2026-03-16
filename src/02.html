@@ -8,15 +8,62 @@
   <script src="/js/main.js" type="module" blocking="render"></script>
   <link href="css/style.css" rel="stylesheet">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <style>
+    div:has(>fieldset) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      margin-inline: auto;
+      width: min(600px, 100%);
+    }
+
+    fieldset {
+      display: grid;
+      gap: var(--spacing-md);
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      border-color: var(--color-border);
+    }
+
+    .color-block {
+      height: 100px;
+      background-color: var(--color-text);
+      border: 1px solid var(--color-border);
+      @media (prefers-reduced-motion: no-preference) {
+        transition: scale 125ms ease-in-out;
+      }
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <rs-nav></rs-nav>
 
   <main class="container">
-      <rs-css-editor css="label { color: red };" open="false">
-        <label for="">Hello world</label>
-        <input type="text" value="something">
+      <rs-css-editor 
+        css="#brand {\n\tbackground-color: oklch(0.65 40% 200);\n}\n#text {\n\tbackground-color: oklch(0.9 4% 200);\n}\n#bg {\n\tbackground-color: oklch(0.25 4% 200);\n}\n#fg {\n\tbackground-color: oklch(0.4 4% 200);\n}\n\n\n#red {\n\tbackground-color: oklch(0.6 40% 20);\n}\n#violet {\n\tbackground-color: oklch(0.6 40% 294);\n}\n#orange {\n\tbackground-color: oklch(0.6 40% 70);\n}\n#green {\n\tbackground-color: oklch(0.6 40% 120);\n}\n" 
+        open="false"
+      >
+        <div>
+          <fieldset>
+            <legend>Väriesimerkki</legend>
+            <div id="red" class="color-block"></div>
+            <div id="violet" class="color-block"></div>
+            <div id="orange" class="color-block"></div>
+            <div id="green" class="color-block"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Väriteema</legend>
+            <div id="brand" class="color-block"></div>
+            <div id="text" class="color-block"></div>
+            <div id="bg" class="color-block"></div>
+            <div id="fg" class="color-block"></div>
+          </fieldset>
+        </div>
       </rs-css-editor>
   </main>
 

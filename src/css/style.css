@@ -18,6 +18,8 @@ body {
 
 .container {
     padding-inline: min(4%, var(--spacing-xl));
+    place-self: center;
+    width: 100%;
 }
 
 /* code slides page */

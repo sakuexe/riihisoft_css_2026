@@ -74,8 +74,10 @@ class RiihisoftCssEditor extends HTMLElement {
         gap: var(--spacing-md);
         font-size: 1.25em;
 
-        transition: grid-template-columns var(--animation-duration) ease-in-out;
-        transition-delay: var(--animation-delay);
+        @media (prefers-reduced-motion: no-preference) {
+          transition: grid-template-columns var(--animation-duration) ease-in-out;
+          transition-delay: var(--animation-delay);
+        }
 
         @container (width > 768px) {
           grid-template-columns: 1fr 0px;
@@ -84,18 +86,20 @@ class RiihisoftCssEditor extends HTMLElement {
 
       :host:has(aside[aria-expanded="true"]) {
         @container (width > 768px) {
-          grid-template-columns: 1fr max(500px, 20vw);
+          grid-template-columns: 1fr min(768px, 40vw);
         }
       }
 
       section {
-        display: grid;
-        place-content: center;
-        width: 100%;
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
+        padding-inline: var(--spacing-xl);
+        padding-block: var(--spacing-md);
         font-size: 1em;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       section button.toggle {
@@ -114,7 +118,9 @@ class RiihisoftCssEditor extends HTMLElement {
       }
 
       section button.toggle i {
-        transition: rotate 150ms ease-in-out;
+        @media (prefers-reduced-motion: no-preference) {
+          transition: rotate 150ms ease-in-out;
+        }
       }
 
       section:has(+aside[aria-expanded="true"]) button.toggle i {
@@ -125,8 +131,10 @@ class RiihisoftCssEditor extends HTMLElement {
         overflow-x: auto;
         overflow-y: clip;
 
-        transition: opacity calc(var(--animation-duration) / 2) ease-in-out;
-        transition-delay: calc(var(--animation-delay) * 2);
+        @media (prefers-reduced-motion: no-preference) {
+          transition: opacity calc(var(--animation-duration) / 2) ease-in-out;
+          transition-delay: calc(var(--animation-delay) * 2);
+        }
 
           &[aria-expanded="false"] {
             overflow-x: clip;
@@ -144,8 +152,11 @@ class RiihisoftCssEditor extends HTMLElement {
             margin: 0;
             tab-size: 4;
             font-size: 1em;
-            transition: color var(--animation-delay) ease-in-out;
             box-sizing: border-box;
+
+            @media (prefers-reduced-motion: no-preference) {
+              transition: color var(--animation-delay) ease-in-out;
+            }
           }
 
           &[aria-expanded="false"] #css-editor {
@@ -153,7 +164,9 @@ class RiihisoftCssEditor extends HTMLElement {
           }
 
           &[aria-expanded="true"] #css-editor {
-            transition-delay: calc(var(--animation-duration) + var(--animation-delay));
+            @media (prefers-reduced-motion: no-preference) {
+              transition-delay: calc(var(--animation-duration) + var(--animation-delay));
+            }
           }
         }
       </style>
@@ -169,8 +182,9 @@ class RiihisoftCssEditor extends HTMLElement {
         <textarea 
           id="css-editor" 
           class="language-css" 
+          spellcheck="false"
           onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'\t'+v.substring(e);this.selectionStart=this.selectionEnd=s+1;return false;}"
-        >${css}</textarea>
+        >${css.replaceAll("\\t", "\t").replaceAll("\\n", "\n")}</textarea>
       </aside>
     `;
 
@@ -195,7 +209,7 @@ class RiihisoftCssEditor extends HTMLElement {
     /** @type {HTMLStyleElement } */
     this.previewStyle = document.createElement('style');
     this.appendChild(this.previewStyle);
-    this.previewStyle.textContent = css;
+    this.previewStyle.textContent = css.replaceAll("\\t", "\t").replaceAll("\\n", "\n");
 
     cssEditor.addEventListener('input', (e) => {
       //@ts-ignore

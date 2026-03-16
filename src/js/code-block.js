@@ -53,6 +53,9 @@ class RiihisoftCodeBlock extends HTMLElement {
           container-type: scroll-state;
           container-name: slide;
           font-family: monospace;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
 
         .code-block {
@@ -63,7 +66,6 @@ class RiihisoftCodeBlock extends HTMLElement {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          height: clamp(400px, 100%, 1000px);
         }
 
         pre {
