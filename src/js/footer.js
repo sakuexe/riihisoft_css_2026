@@ -17,9 +17,9 @@ class RiihisoftFooter extends HTMLElement {
   }
 
   render() {
-    const prev = this.getAttribute("prev") || "#";
-    const next = this.getAttribute("next") || "#";
     const pageNumber = location.pathname.split("/")[1]?.split(".html")[0] || "00";
+    const prev = this.getAttribute("prev") || `${(parseInt(pageNumber) - 1).toString().padStart(2, "0")}.html`;
+    const next = this.getAttribute("next") || `${(parseInt(pageNumber) + 1).toString().padStart(2, "0")}.html`;
 
     if (!this.shadowRoot) return;
 

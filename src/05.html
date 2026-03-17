@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | :has()</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <style>
+    div:has(>fieldset) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+      margin-inline: auto;
+      width: min(600px, 100%);
+    }
+
+    fieldset {
+      --color-invalid: oklch(0.80 30% 60);
+
+      display: grid;
+      gap: var(--spacing-md);
+      border-color: var(--color-border);
+      width: min(700px, 100%);
+      margin-inline: auto;
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: border-color 125ms ease-in-out;
+        transition-property: border-color, box-shadow;
+      }
+
+      &:focus-within {
+        border-color: var(--color-brand);
+        box-shadow: 0 0 20px oklch(from var(--color-brand) l c h / 0.5);
+      }
+    }
+
+    .form-group {
+      display: grid;
+      gap: var(--spacing-xs);
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: scale 125ms ease-in-out;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: var(--spacing-md);
+      }
+
+      input {
+        width: 100%;
+        font-size: inherit;
+        font-family: inherit;
+        background-color: transparent;
+        border: 1px solid var(--color-border);
+        padding-inline: var(--spacing-md);
+        padding-block: var(--spacing-xs);
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: none;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+        color: var(--color-invalid);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="container">
+      <rs-editor 
+        css='input:user-invalid {\n\tborder-color: var(--color-invalid);\n}\n\ninput:user-invalid + ul {\n\tdisplay: block;\n}\n\nlabel:has(+input:required)::after {\n\tcontent: "*";\n\tmargin-left: var(--spacing-xs);\n\topacity: 0.5;\n}'
+        open="false"
+      >
+
+        <fieldset>
+          <legend>Tärkeä lomake</legend>
+          <form>
+
+            <div class="form-group">
+              <label for="email">Email osoite</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                placeholder="valid@email.com" 
+                required
+              />
+              <ul>
+                <li><i class="material-symbols">warning</i> Invalid email type</li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label for="age">Ikä</label>
+              <input 
+                type="number" 
+                name="age" 
+                id="age" 
+                min="18"
+                value="21"
+                required
+              />
+              <ul>
+                <li><i class="material-symbols">warning</i> You are too young to submit this form</li>
+              </ul>
+            </div>
+
+          </form>
+        </fieldset>
+
+      </rs-editor>
+  </main>
+
+  <rs-footer></rs-footer>
+</body>
+
+</html>

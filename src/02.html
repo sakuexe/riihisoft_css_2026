@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Riihisoft CSS | :has()</title>
+  <title>Riihisoft CSS | OKLCH Example</title>
   <script src="/js/main.js" type="module" blocking="render"></script>
-  <link href="css/style.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
   <link rel="icon" href="/images/favicon.ico" sizes="any">
   <style>
     div:has(>fieldset) {
@@ -43,7 +43,7 @@
   <rs-nav></rs-nav>
 
   <main class="container">
-      <rs-css-editor 
+      <rs-editor 
         css="#brand {\n\tbackground-color: oklch(0.65 40% 200);\n}\n#text {\n\tbackground-color: oklch(0.9 4% 200);\n}\n#bg {\n\tbackground-color: oklch(0.25 4% 200);\n}\n#fg {\n\tbackground-color: oklch(0.4 4% 200);\n}\n\n\n#red {\n\tbackground-color: oklch(0.6 40% 20);\n}\n#violet {\n\tbackground-color: oklch(0.6 40% 294);\n}\n#orange {\n\tbackground-color: oklch(0.6 40% 70);\n}\n#green {\n\tbackground-color: oklch(0.6 40% 120);\n}\n" 
         open="false"
       >
@@ -64,10 +64,10 @@
             <div id="fg" class="color-block"></div>
           </fieldset>
         </div>
-      </rs-css-editor>
+      </rs-editor>
   </main>
 
-  <rs-footer prev="/01.html" next="/03.html"></rs-footer>
+  <rs-footer></rs-footer>
 </body>
 
 </html>

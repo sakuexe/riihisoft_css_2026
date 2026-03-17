@@ -204,12 +204,15 @@ class RiihisoftCssEditor extends HTMLElement {
 
     /** @type {HTMLTextAreaElement | null} */
     const cssEditor = this.shadowRoot.querySelector("#css-editor");
-    if (!cssEditor) throw new Error("`#css-editor` not found inside the rs-css-editor component");
+    if (!cssEditor) throw new Error("`#css-editor` not found inside the rs-editor component");
 
-    /** @type {HTMLStyleElement } */
-    this.previewStyle = document.createElement('style');
-    this.appendChild(this.previewStyle);
-    this.previewStyle.textContent = css.replaceAll("\\t", "\t").replaceAll("\\n", "\n");
+    if (!this.previewStyle) {
+      /** @type {HTMLStyleElement } */
+      this.previewStyle = document.createElement('style');
+      this.previewStyle?.classList.add("editor-style");
+      this.appendChild(this.previewStyle);
+      this.previewStyle.textContent = css.replaceAll("\\t", "\t").replaceAll("\\n", "\n");
+    }
 
     cssEditor.addEventListener('input', (e) => {
       //@ts-ignore
@@ -218,4 +221,4 @@ class RiihisoftCssEditor extends HTMLElement {
   }
 }
 
-customElements.define("rs-css-editor", RiihisoftCssEditor);
+customElements.define("rs-editor", RiihisoftCssEditor);
