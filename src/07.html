@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | Container Queries Example</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <style>
+    div:has(>.box) {
+      display: grid;
+      gap: var(--spacing-md);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      border-color: var(--color-border);
+      width: min(700px, 100%);
+      height: 500px;
+      margin-inline: auto;
+      grid-auto-rows: 1fr;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-border);
+
+      &:nth-child(odd) {
+        background-color: oklch(from var(--color-border) l c h / 0.5);
+      }
+    }
+
+    .box:first-child {
+      border: 1px solid var(--color-brand);
+      background-color: oklch(from var(--color-brand) l c h / 0.5);
+      background-image: url("/images/riihisoft_logo.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  </style>
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="container">
+      <rs-editor 
+        css="div:has(>.box) {\n\tresize: both;\n\toverflow: auto;\n\n\tcontainer: --bento / size;\n}\n\n.box:first-child {\n\tgrid-column: span 2;\n\n\t@container --bento (orientation: landscape) {\n\t\tgrid-row: span 2;\n\t\tgrid-column: span 1;\n\t}\n}"
+        open="false"
+      >
+
+        <div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+        </div>
+
+      </rs-editor>
+  </main>
+
+  <rs-footer></rs-footer>
+</body>
+
+</html>
