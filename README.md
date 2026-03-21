@@ -7,6 +7,29 @@ Repositories:
 - [Github mirror](https://github.com/sakuexe/riihisoft_css_2026)
 - [Tangled mirror](https://tangled.org/saku.tngl.sh/riihisoft-css-training-2026)
 
+## Running it
+
+**Node.js**
+
+```bash
+$ npm ci
+$ npm run dev
+```
+
+**Python**
+
+```bash
+$ cd src
+$ python3 -m http.server
+```
+
+**Docker**
+
+```bash
+$ docker build -t css-dev .
+$ docker run --rm -it -p 5173:5173 -v "$PWD":/app -v /app/node_modules css-dev
+```
+
 ## Basics
 
 ### OKLCH

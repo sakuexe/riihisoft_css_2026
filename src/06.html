@@ -49,6 +49,30 @@
   height: 50cqb; /* 50% containerin korkeudesta */
 }
       </rs-code-block>
+
+      <rs-code-block language="css">
+.slider {
+  scroll-snap-type: x mandatory;
+}
+
+rs-code-block {
+  /* aseta container kuuntelemaan scrollia */
+  container: slide / scroll-state;
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+.code-block {
+  transform: scale(0.75);
+  opacity: 0.25;
+
+  /* kun elementti on aktiivisena */
+  @container slide scroll-state(snapped: x) {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+      </rs-code-block>
     </rs-code-slides>
 
     <div class="reference-buttons container">

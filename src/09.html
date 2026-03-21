@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | Cascade layers</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="explanation-page">
+
+    <rs-code-slides kicker="Tärkeysjärjestystä" title="Cascade layers">
+      <rs-code-block language="css">
+/* aseta tasojen prioritointi järjestys */
+@layer base, theme;
+
+/* sijoita tyyli omalle tasolleen */
+@layer base {
+  button {
+    background: red;
+  }
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+/* pohjatyyli (prio 3) */
+@layer base {
+  button { background: red; }
+}
+
+/* yliajaa base:n (prio 2) */
+@layer theme {
+  button { background: blue; }
+}
+
+/* yliajaa kaikki tasot (prio 1) */
+button { background: blue; }
+      </rs-code-block>
+
+      <rs-code-block language="css">
+@layer base, theme;
+
+@import url("bootstrap.css") layer(base);
+
+.card {
+  margin-block: 1rem;
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+@layer low, high;
+
+@layer low {
+  #id .class {
+    color: red;
+  }
+}
+
+/* priorisoidaan, vaikka ylempänä oleva selector on specifimpi */
+@layer high {
+  p {
+    color: blue;
+  }
+}
+      </rs-code-block>
+    </rs-code-slides>
+
+    <div class="reference-buttons container">
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction" target="_blank" class="button secondary">
+          Mozilla introduction
+      </a>
+      <a href="https://caniuse.com/css-cascade-layers" target="_blank"
+        class="button link">
+          Browser support
+      </a>
+    </div>
+
+  </main>
+
+  <rs-footer></rs-footer>
+
+</body>
+
+</html>

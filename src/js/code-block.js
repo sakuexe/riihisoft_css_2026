@@ -93,9 +93,8 @@ class RiihisoftCodeBlock extends HTMLElement {
           background-color: transparent;
         }
 
-        /*
         .hljs-comment, .hljs-meta, code.hljs {
-          color: oklch(from var(--color-text) l c h / 0.5);
+          color: oklch(from var(--color-text) l c h / 0.7);
         }
 
         .hljs-deletion, .hljs-doctag, .hljs-regexp, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-tag, .hljs-template-tag, .hljs-variable.language_ {
@@ -113,7 +112,10 @@ class RiihisoftCodeBlock extends HTMLElement {
         .hljs-link, .hljs-literal, .hljs-number, .hljs-params, .hljs-template-variable, .hljs-type, .hljs-variable {
           color: oklch(from var(--color-text) l c h);
         }
-        */
+
+        .hljs-addition, .hljs-bullet, .hljs-quote, .hljs-string, .hljs-symbol {
+          color: oklch(from var(--color-brand) calc(l * 1.25) c calc(h - 120));
+        }
       </style>
 
       <div class="code-block">
