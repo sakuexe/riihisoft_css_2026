@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | @property and functions example</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+  <style>
+    fieldset {
+      border-color: var(--color-border);
+    }
+
+    fieldset:has(>.box) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+      width: 100%;
+    }
+
+    .box {
+      flex: 1 1 300px;
+      height: 200px;
+      background-color: var(--color-border);
+      border: 1px solid var(--color-border);
+
+      display: grid;
+      place-content: center;
+      text-align: center;
+
+      &>span:first-of-type {
+        font-weight: bold;
+      }
+
+      &>span:last-of-type {
+        font-size: 0.7em;
+      }
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: 1.5em;
+      height: 1.5em;
+    }
+
+    .box.brand {
+      background-color: var(--brand);
+    }
+
+    .box.brand-light {
+      background-color: oklch(from var(--brand) calc(l * 0.75) c h);
+    }
+
+    .box.brand-dark {
+      background-color: oklch(from var(--brand) calc(l * 1.25) c h);
+    }
+
+    .box.bg {
+      background-color: oklch(from var(--brand) 15% 10% h);
+    }
+
+    .box.fg {
+      background-color: oklch(from var(--brand) 25% 10% h);
+    }
+
+    .box.text {
+      background-color: oklch(from var(--brand) 95% 10% h);
+      color: var(--color-bg);
+    }
+
+    .box.text-muted {
+      background-color: oklch(from var(--brand) 80% 10% h);
+      color: var(--color-bg);
+    }
+  </style>
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="container">
+      <rs-editor 
+        css="main:has(#riihisoft:checked) {\n\t--brand: oklch(50% 30% 260);\n\taccent-color: var(--brand);\n}\n\nmain:has(#plentics:checked) {\n\t--brand: oklch(50% 30% 147);\n\taccent-color: var(--brand);\n}"
+        open="false"
+      >
+
+        <fieldset>
+          <legend>Gradientti animaatiot</legend>
+          <label>
+            <input type="radio" name="company" id="riihisoft" checked>
+            Riihisoft
+          </label>
+          <label>
+            <input type="radio" name="company" id="plentics">
+            Plentics
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Väriteema</legend>
+          <input type="text">
+        </fieldset>
+
+      </rs-editor>
+  </main>
+
+  <rs-footer></rs-footer>
+</body>
+
+</html>

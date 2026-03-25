@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | Functions</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="explanation-page">
+
+    <rs-code-slides kicker="Muuttujat supervoimilla" title="@property">
+
+      <rs-code-block language="css">
+/* syntaxi */
+@property --my-var {
+  syntax: "&lt;length&gt;"; /* css datatyyppi */
+  inherits: false; /* siirtyykö asetettu arvo lapsielementeille */
+  initial-value: 0px; /* vakio / fallback arvo */
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+@property --angle {
+  syntax: "&lt;angle&gt;";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* animoi gradientteja (normaalisti mahdotonta) */
+.box {
+  --angle: 0deg;
+  background: linear-gradient(var(--angle), red, blue);
+  transition: --angle 0.5s;
+}
+
+.box:hover {
+  --angle: 180deg;
+}
+      </rs-code-block>
+
+    </rs-code-slides>
+
+    <div class="reference-buttons container">
+      <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property" target="_blank" class="button secondary">
+          Mozilla documentation
+      </a>
+      <a href="https://caniuse.com/mdn-css_at-rules_property" target="_blank"
+        class="button link">
+          Browser support
+      </a>
+    </div>
+
+  </main>
+
+  <rs-footer></rs-footer>
+
+</body>
+
+</html>

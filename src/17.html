@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | View Transitions</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="explanation-page">
+
+    <rs-code-slides kicker="Natiivien appien tuntumaa" title="View Transitions API">
+
+      <rs-code-block language="css">
+/* monisivuinen view-transition */
+@view-transition {
+  navigation: auto;
+}
+      </rs-code-block>
+
+      <rs-code-block language="javascript">
+/* javascriptin kautta aktivoitu view-transition */
+document.startViewTransition(() =&gt; {
+  doSomethingToDOM();
+});
+      </rs-code-block>
+
+      <rs-code-block language="css">
+/* tee omat animaatiot sivujen välille */
+::view-transition-group(root) {
+  animation-duration: 400ms;
+}
+
+::view-transition-old(root) {
+  /* toimii normaaleilla @keyframes animaatioilla */
+  animation: old-slide-out 400ms ease both;
+}
+
+::view-transition-new(root) {
+  animation: new-slide-in 400ms ease both;
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+nav {
+  view-transition-name: navigation;
+}
+      </rs-code-block>
+
+      <rs-code-block language="css">
+/* muista että kaikki eivät siedä liikaa liikettä */
+::view-transition-group(root) {
+  animation-duration: 400ms;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 0ms;
+  }
+
+  /* voit myös suunnitella logiikan toisinpäin */
+  @media (prefers-reduced-motion: no-preference) { }
+}
+      </rs-code-block>
+    </rs-code-slides>
+
+    <div class="reference-buttons container">
+      <a href="https://codepen.io/argyleink/pen/RwdRaVg" target="_blank" class="button primary">
+          Codepen example
+      </a>
+      <a href="https://www.youtube.com/watch?v=nZtg-xzhy0g" target="_blank" class="button secondary">
+          CSS View Transitions - video
+      </a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API" target="_blank" class="button secondary">
+          Mozilla documentation
+      </a>
+      <a href="https://caniuse.com/?search=view+transition" target="_blank"
+        class="button link">
+          Browser support
+      </a>
+    </div>
+
+  </main>
+
+  <rs-footer></rs-footer>
+
+</body>
+
+</html>
