@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riihisoft CSS | Scroll driven animation example</title>
+  <script src="/js/main.js" type="module" blocking="render"></script>
+  <link href="/css/style.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
+
+  <style>
+    h1, p {
+      margin: 0;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: var(--spacing-md);
+    }
+    p {
+      font-size: 1.5rem;
+    }
+    img {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 500px;
+      z-index: -1;
+      opacity: 0.2;
+      @media (prefers-reduced-motion: no-preference) {
+        animation: pulse 30s linear infinite;
+      }
+    }
+     
+    @keyframes pulse {
+      100% { rotate: 1turn; }
+    }
+  </style>
+</head>
+
+<body>
+  <rs-nav></rs-nav>
+
+  <main class="container">
+      <h1>Kiitos</h1>
+      <p>Kysyttävää?</p>
+      <img src="./images/riihisoft_logo_no_text.png" alt="">
+  </main>
+
+  <rs-footer></rs-footer>
+</body>
+
+</html>

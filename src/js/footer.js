@@ -52,7 +52,7 @@ class RiihisoftFooter extends HTMLElement {
         </a>
 
         <div>
-          <span><strong>${pageNumber}</strong> / 20</span>
+          <span><strong>${pageNumber}</strong> / 19</span>
           <span>Riihisoft &copy; 2026</span>
         </div>
 
