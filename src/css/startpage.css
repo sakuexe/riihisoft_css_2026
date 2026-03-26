@@ -1,0 +1,20 @@
+#index-page {
+    place-self: center;
+    text-align: center;
+
+    &>:not(:last-child) {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    h1, p {
+        margin: 0;
+    }
+
+    h1 > span {
+        color: var(--color-brand);
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+}
