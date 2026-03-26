@@ -1,9 +1,9 @@
 import { defineConfig } from "vite"
 
-export default defineConfig(({ command }) => {
+export default defineConfig(() => {
   return {
     root: "src",
-    base: command === "serve" ? "/" : "/riihisoft_css_2026/",
+    base: "/",
     build: {
       outDir: "../dist",
       emptyOutDir: true,
