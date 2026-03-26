@@ -46,7 +46,7 @@ class RiihisoftNav extends HTMLElement {
           width: var(--nav-width);
 
           @media (prefers-reduced-motion: no-preference) {
-            transition: right 600ms var(--animation-function-overshoot);
+            transition: right 600ms ease-in-out;
           }
 
           &[aria-expanded="false"] {
