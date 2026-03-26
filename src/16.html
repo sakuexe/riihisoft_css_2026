@@ -11,68 +11,36 @@
   <style>
     fieldset {
       border-color: var(--color-border);
-    }
-
-    fieldset:has(>.box) {
       display: flex;
       flex-wrap: wrap;
       gap: var(--spacing-md);
-      width: 100%;
     }
 
-    .box {
-      flex: 1 1 300px;
-      height: 200px;
-      background-color: var(--color-border);
-      border: 1px solid var(--color-border);
+    .loading-skeleton {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
 
+    .gradients {
       display: grid;
       place-content: center;
-      text-align: center;
+    }
 
-      &>span:first-of-type {
-        font-weight: bold;
+    .gradients div {
+      width: 5rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+
+    .loading-skeleton div {
+      --highlight-color: oklch(from var(--color-fg) calc(l * 1.25) c h);
+      --shine-width: 10%;
+
+      height: 6rem;
+
+      &:first-of-type {
+        grid-column: 1/-1;
       }
-
-      &>span:last-of-type {
-        font-size: 0.7em;
-      }
-    }
-
-    input[type="radio"],
-    input[type="checkbox"] {
-      width: 1.5em;
-      height: 1.5em;
-    }
-
-    .box.brand {
-      background-color: var(--brand);
-    }
-
-    .box.brand-light {
-      background-color: oklch(from var(--brand) calc(l * 0.75) c h);
-    }
-
-    .box.brand-dark {
-      background-color: oklch(from var(--brand) calc(l * 1.25) c h);
-    }
-
-    .box.bg {
-      background-color: oklch(from var(--brand) 15% 10% h);
-    }
-
-    .box.fg {
-      background-color: oklch(from var(--brand) 25% 10% h);
-    }
-
-    .box.text {
-      background-color: oklch(from var(--brand) 95% 10% h);
-      color: var(--color-bg);
-    }
-
-    .box.text-muted {
-      background-color: oklch(from var(--brand) 80% 10% h);
-      color: var(--color-bg);
     }
   </style>
 </head>
@@ -81,29 +49,25 @@
   <rs-nav></rs-nav>
 
   <main class="container">
-      <rs-editor 
-        css="main:has(#riihisoft:checked) {\n\t--brand: oklch(50% 30% 260);\n\taccent-color: var(--brand);\n}\n\nmain:has(#plentics:checked) {\n\t--brand: oklch(50% 30% 147);\n\taccent-color: var(--brand);\n}"
-        open="false"
-      >
+    <rs-editor
+      css='@property --shine-pos {\n\tsyntax: "<percentage>";\n\tinherits: false;\n\tinitial-value: 0%;\n}\n\n.loading-skeleton div {\n\tbackground: linear-gradient(120deg,\n\t\tvar(--color-fg) calc(var(--shine-pos) - var(--shine-width)),\n\t\tvar(--highlight-color) var(--shine-pos),\n\t\tvar(--color-fg) calc(var(--shine-pos) + var(--shine-width)));\n}\n\n@media (prefers-reduced-motion: no-preference) {\n\t.loading-skeleton div {\n\t\tanimation: skeleton-shine 2s linear infinite;\n\t}\n}\n\n@keyframes skeleton-shine {\n\tfrom {\n\t\t--shine-pos: -20%;\n\t}\n\n\tto {\n\t\t--shine-pos: 150%;\n\t}\n}\n\n@property --angle {\n\tsyntax: "<angle>";\n\tinherits: false;\n\tinitial-value: 0deg;\n}\n\n.gradients div {\n\tbackground: conic-gradient(from var(--angle),\n\t\toklch(from var(--color-brand) l c h) 0deg 90deg,\n\t\toklch(from var(--color-brand) l c calc(h + 60)) 90deg 180deg,\n\t\toklch(from var(--color-brand) l c calc(h + 120)) 180deg 270deg,\n\t\toklch(from var(--color-brand) l c calc(h + 180)) 270deg 360deg);\n\n\t-webkit-mask: radial-gradient(circle, transparent 30%, black 31%);\n\tmask: radial-gradient(circle, transparent 30%, black 31%);\n}\n\n@media (prefers-reduced-motion: no-preference) {\n\t.gradients div {\n\t\tanimation: spin 1s linear infinite;\n\t}\n}\n\n@keyframes spin {\n\tto {\n\t\t--angle: 360deg;\n\t}\n}'
+      open="false">
 
-        <fieldset>
-          <legend>Gradientti animaatiot</legend>
-          <label>
-            <input type="radio" name="company" id="riihisoft" checked>
-            Riihisoft
-          </label>
-          <label>
-            <input type="radio" name="company" id="plentics">
-            Plentics
-          </label>
-        </fieldset>
+      <fieldset class="loading-skeleton">
+        <legend>Loading skeleton -esimerkki</legend>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </fieldset>
 
-        <fieldset>
-          <legend>Väriteema</legend>
-          <input type="text">
-        </fieldset>
+      <fieldset class="gradients">
+        <legend>Gradientti animaatio</legend>
+        <div></div>
+      </fieldset>
 
-      </rs-editor>
+    </rs-editor>
   </main>
 
   <rs-footer></rs-footer>

@@ -237,6 +237,4 @@ easier entry events
 
 ## Ideas
 
-- button that plays a noise like "this guy has his audio on!" to deter people from having audio on.
-
 - greppable comments, so that people can look for where I have used the things I talk about
