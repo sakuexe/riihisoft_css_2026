@@ -61,12 +61,6 @@ class RiihisoftFooter extends HTMLElement {
         </a>
       </footer>
     `;
-
-    //@ts-ignore
-    if (window.lucide) {
-      //@ts-ignore
-      lucide.createIcons();
-    }
   }
 }
 

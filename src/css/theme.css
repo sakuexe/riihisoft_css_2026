@@ -12,6 +12,8 @@
     --spacing-6xl: calc(1rem * 12);
     --spacing-7xl: calc(1rem * 16);
 
+    --animation-function-overshoot: linear(0, 0.386 8.1%, 0.689 16.7%, 0.906 25.8%, 0.986 30.6%, 1.046 35.6%, 1.082 39.9%, 1.106 44.4%, 1.118 49.2%, 1.12 54.4%, 1.101 63.7%, 1.017 87.1%, 1);
+
     --border-radius: 12px;
 
     /* base color used for the colorscheme */
