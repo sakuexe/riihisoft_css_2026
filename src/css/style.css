@@ -1,13 +1,13 @@
 @layer base, theme, components, override;
 
-@import url("./view-transitions.css") layer(base);
+@import url("/css/view-transitions.css") layer(base);
 
-@import url("./theme.css") layer(theme);
-@import url("./fonts.css") layer(theme);
+@import url("/css/theme.css") layer(theme);
+@import url("/css/fonts.css") layer(theme);
 
-@import url("./buttons.css") layer(components);
-@import url("./examplepage.css") layer(components);
-@import url("./startpage.css") layer(components);
+@import url("/css/buttons.css") layer(components);
+@import url("/css/examplepage.css") layer(components);
+@import url("/css/startpage.css") layer(components);
 
 body {
     height: 100dvh;
