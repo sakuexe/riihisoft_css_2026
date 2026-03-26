@@ -1,13 +1,17 @@
 # Riihisoft training day materials, March 2026
 
-Topic: CSS is pretty cool nowadays
+CSS is pretty cool nowadays, so I compiled some of the cool parts
+of it into one package.
+
+[Open the slides](https://csstraining.sakukarttunen.com/)
 
 Repositories:
 
 - [Github mirror](https://github.com/sakuexe/riihisoft_css_2026)
 - [Tangled mirror](https://tangled.org/saku.tngl.sh/riihisoft-css-training-2026)
 
-## Running it
+
+## Running it locally
 
 **Node.js**
 
@@ -30,7 +34,8 @@ $ docker build -t css-dev .
 $ docker run --rm -it -p 5173:5173 -v "$PWD":/app -v /app/node_modules css-dev
 ```
 
-## Basics
+
+## Planning
 
 ### OKLCH
 
@@ -234,7 +239,3 @@ done with `summary` and `details`
 ### `@starting-style`
 
 easier entry events
-
-## Ideas
-
-- greppable comments, so that people can look for where I have used the things I talk about
